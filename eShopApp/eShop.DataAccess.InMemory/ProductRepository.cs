@@ -40,7 +40,7 @@ namespace eShop.DataAccess.InMemory
                 throw new Exception("NOT FOUND");
             }
         }
-        public void Find(string ID)
+        public Product Find(string ID)
         {
             Product product = products.Find(p => p.ID == ID);
             if (product != null)

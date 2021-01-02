@@ -12,9 +12,11 @@ namespace eShop.Core.Models
     {
         [StringLength(20)]
         public string ID { get; set; }
+
         [DisplayName("Product Name")]
         public string Name { get; set; }
         public string Description { get; set; }
+
         [Range(0, 1000)]
         public decimal Price { get; set; }
         public string Category { get; set; }
