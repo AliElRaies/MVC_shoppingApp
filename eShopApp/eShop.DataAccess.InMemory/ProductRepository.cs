@@ -28,7 +28,7 @@ namespace eShop.DataAccess.InMemory
         {
             products.Add(p);
         }
-        public void Update(Product product)
+        public void Update(Product productToUpdate)
         {
             Product productToUpdate = products.Find(p => p.ID == product.ID);
             if(productToUpdate != null)
@@ -67,6 +67,6 @@ namespace eShop.DataAccess.InMemory
             {
                 throw new Exception("NOT FOUND");
             }
-        }
+        } 
     }
 }

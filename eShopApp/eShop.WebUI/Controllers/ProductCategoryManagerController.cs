@@ -8,64 +8,59 @@ using eShop.DataAccess.InMemory;
 
 namespace eShop.WebUI.Controllers
 {
-    public class ProductManagerController : Controller
+    public class ProductCategoryManagerController : Controller
     {
         ProductRepository context;
 
-        public ProductManagerController()
+        public ProductCategoryManagerController()
         {
-            context = new ProductRepository();
+            context = new ProductCategoryRepository();
         }
 
-        // GET: ProductManager
         public ActionResult Index()
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            List<ProductCategory> productCategory = context.Collection().ToList();
+            return View(productCategory);
         }
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductCategory productCategory = new ProductCategory();
+            return View(productCategory);
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product productCategory)
         {
             if (!ModelState.IsValid)
-                return View(product);
+                return View(productCategory);
             else
             {
-                context.Insert(product);
+                context.Insert(productCategory);
                 context.Comit();
                 return RedirectToAction("Index");
             }
         }
         public ActionResult Edit(string ID)
         {
-            Product product = context.Find(ID);
-            if (product == null)
+            Product productCategory = context.Find(ID);
+            if (productCategory == null)
                 return HttpNotFound();
             else
-                return View(product);
+                return View(productCategory);
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string ID)
+        public ActionResult Edit(Product productCategory, string ID)
         {
-            Product productToEdit = context.Find(ID);
-            if (productToEdit == null)
+            ProductCategory productCategoryToEdit = context.Find(ID);
+            if (productCategoryToEdit == null)
                 return HttpNotFound();
             else
             {
                 if (!ModelState.IsValid)
-                    return View(product);
+                    return View(productCategory);
 
-                productToEdit.Category = product.Category;
-                productToEdit.Description = product.Description;
-                productToEdit.Image = product.Image;
-                productToEdit.Name = product.Name;
-                productToEdit.Price = product.Price;
+                productCategoryToEdit.Category = productCategory.Category;
 
                 context.Comit();
                 return RedirectToAction("Index");
@@ -73,20 +68,20 @@ namespace eShop.WebUI.Controllers
         }
         public ActionResult Delete(string ID)
         {
-            Product productToDelete = context.Find(ID);
-            if (productToDelete == null)
+            Product productCategoryToDelete = context.Find(ID);
+            if (productCategoryToDelete == null)
                 return HttpNotFound();
             else
             {
-                return View(productToDelete);
+                return View(productCategoryToDelete);
             }
         }
         [HttpPost]
         [ActionName("Delete")]
         public ActionResult ConfirmDeletion(string ID)
         {
-            Product productToDelete = context.Find(ID);
-            if (productToDelete == null)
+            Product productCategoryToDelete = context.Find(ID);
+            if (productCategoryToDelete == null)
                 return HttpNotFound();
             else
             {
