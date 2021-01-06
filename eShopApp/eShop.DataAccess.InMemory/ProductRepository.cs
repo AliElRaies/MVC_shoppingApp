@@ -28,7 +28,7 @@ namespace eShop.DataAccess.InMemory
         {
             products.Add(p);
         }
-        public void Update(Product productToUpdate)
+        public void Update(Product product)
         {
             Product productToUpdate = products.Find(p => p.ID == product.ID);
             if(productToUpdate != null)

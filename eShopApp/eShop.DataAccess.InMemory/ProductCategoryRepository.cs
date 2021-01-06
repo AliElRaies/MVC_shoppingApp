@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eShop.Core.Models;
+using System.Runtime.Caching;
+
 
 namespace eShop.DataAccess.InMemory
 {
@@ -12,10 +15,10 @@ namespace eShop.DataAccess.InMemory
         List<ProductCategory> productCategories;
         public ProductCategoryRepository()
         {
-            productCategory = new List<ProductCategory>();
-            if (productCategory == null)
+            productCategories = new List<ProductCategory>();
+            if (productCategories == null)
             {
-                productCategory = new List<ProductCategory>();
+                productCategories = new List<ProductCategory>();
             }
         }
         public void Comit()
@@ -24,7 +27,7 @@ namespace eShop.DataAccess.InMemory
         }
         public void Insert(ProductCategory p)
         {
-            productCategory.Add(p);
+            productCategories.Add(p);
         }
         public void Update(ProductCategory productCategory)
         {
@@ -40,7 +43,7 @@ namespace eShop.DataAccess.InMemory
         }
         public ProductCategory Find(string ID)
         {
-            ProductCategory productCategory = productCategory.Find(p => p.ID == ID);
+            ProductCategory productCategory = productCategories.Find(p => p.ID == ID);
             if (productCategory != null)
             {
                 return productCategory;
@@ -52,7 +55,7 @@ namespace eShop.DataAccess.InMemory
         }
         public IQueryable<ProductCategory> Collection()
         {
-            return productCategory.AsQueryable();
+            return productCategories.AsQueryable();
         }
         public void Delete(string ID)
         {

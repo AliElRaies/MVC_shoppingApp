@@ -10,7 +10,7 @@ namespace eShop.WebUI.Controllers
 {
     public class ProductCategoryManagerController : Controller
     {
-        ProductRepository context;
+        ProductCategoryRepository context;
 
         public ProductCategoryManagerController()
         {
@@ -29,7 +29,7 @@ namespace eShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product productCategory)
+        public ActionResult Create(ProductCategory productCategory)
         {
             if (!ModelState.IsValid)
                 return View(productCategory);
@@ -42,7 +42,7 @@ namespace eShop.WebUI.Controllers
         }
         public ActionResult Edit(string ID)
         {
-            Product productCategory = context.Find(ID);
+            ProductCategory productCategory = context.Find(ID);
             if (productCategory == null)
                 return HttpNotFound();
             else
@@ -50,7 +50,7 @@ namespace eShop.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product productCategory, string ID)
+        public ActionResult Edit(ProductCategory productCategory, string ID)
         {
             ProductCategory productCategoryToEdit = context.Find(ID);
             if (productCategoryToEdit == null)
@@ -68,7 +68,7 @@ namespace eShop.WebUI.Controllers
         }
         public ActionResult Delete(string ID)
         {
-            Product productCategoryToDelete = context.Find(ID);
+            ProductCategory productCategoryToDelete = context.Find(ID);
             if (productCategoryToDelete == null)
                 return HttpNotFound();
             else
@@ -80,7 +80,7 @@ namespace eShop.WebUI.Controllers
         [ActionName("Delete")]
         public ActionResult ConfirmDeletion(string ID)
         {
-            Product productCategoryToDelete = context.Find(ID);
+            ProductCategory productCategoryToDelete = context.Find(ID);
             if (productCategoryToDelete == null)
                 return HttpNotFound();
             else
