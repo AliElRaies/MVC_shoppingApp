@@ -20,7 +20,7 @@ namespace eShop.DataAccess.InMemory
                 products = new List<Product>();
             }
         }
-        public void Comit()
+        public void Commit()
         {
             cache["products"] = products;
         }
