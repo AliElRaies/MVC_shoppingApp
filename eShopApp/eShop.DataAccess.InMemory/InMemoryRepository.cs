@@ -1,4 +1,5 @@
-﻿using eShop.Core.Models;
+﻿using eShop.Core.Contracts;
+using eShop.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eShop.DataAccess.InMemory
 {
-    public class InMemoryRepository<T> where T : BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -52,7 +53,7 @@ namespace eShop.DataAccess.InMemory
             else
                 throw new Exception(className + " Not Found");
         }
-        public IQueryable<T> Collection() 
+        public IQueryable<T> Collection()
         {
             return items.AsQueryable();
         }
