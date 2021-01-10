@@ -2,7 +2,6 @@ using eShop.Core.Contracts;
 using eShop.Core.Models;
 using eShop.DataAccess.InMemory;
 using System;
-
 using Unity;
 
 namespace eShop.WebUI
