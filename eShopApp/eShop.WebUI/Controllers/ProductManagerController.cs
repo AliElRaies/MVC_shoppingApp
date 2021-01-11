@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using eShop.Core.Contracts;
 using eShop.Core.Models;
+using eShop.Core.ViewModels;
 using eShop.DataAccess.InMemory;
 
 namespace eShop.WebUI.Controllers
@@ -50,11 +52,16 @@ namespace eShop.WebUI.Controllers
             if (product == null)
                 return HttpNotFound();
             else
-                return View(product);
+            {
+                ProductManagerViewModel viewModel = new ProductManagerViewModel();
+                viewModel.Product = product;
+                viewModel.ProductCategories = productCategories.Collection();
+                return View(viewModel);
+            } 
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product, string ID)
+        public ActionResult Edit(Product product, string ID, HttpPostedFileBase file)
         {
             Product productToEdit = context.Find(ID);
             if (productToEdit == null)
@@ -63,6 +70,12 @@ namespace eShop.WebUI.Controllers
             {
                 if (!ModelState.IsValid)
                     return View(product);
+
+                if (file != null)
+                {
+                    productToEdit.Image = product.ID + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Uploads//ProductImages//") + productToEdit.Image);
+                }
 
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
