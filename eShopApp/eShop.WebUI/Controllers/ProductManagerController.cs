@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using eShop.Core.Contracts;
 using eShop.Core.Models;
 using eShop.Core.ViewModels;
-using eShop.DataAccess.InMemory;
 
 namespace eShop.WebUI.Controllers
 {
@@ -30,19 +29,32 @@ namespace eShop.WebUI.Controllers
         }
         public ActionResult Create()
         {
-            Product product = new Product();
-            return View(product);
+            ProductManagerViewModel viewModel = new ProductManagerViewModel();
+
+            viewModel.Product = new Product();
+            viewModel.ProductCategories = productCategories.Collection();
+            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (!ModelState.IsValid)
+            {
                 return View(product);
+            }
             else
             {
+
+                if (file != null)
+                {
+                    product.Image = product.ID + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + product.Image);
+                }
+
                 context.Insert(product);
                 context.Commit();
+
                 return RedirectToAction("Index");
             }
         }
@@ -74,12 +86,11 @@ namespace eShop.WebUI.Controllers
                 if (file != null)
                 {
                     productToEdit.Image = product.ID + Path.GetExtension(file.FileName);
-                    file.SaveAs(Server.MapPath("//Uploads//ProductImages//") + productToEdit.Image);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//") + productToEdit.Image);
                 }
 
                 productToEdit.Category = product.Category;
                 productToEdit.Description = product.Description;
-                productToEdit.Image = product.Image;
                 productToEdit.Name = product.Name;
                 productToEdit.Price = product.Price;
 
