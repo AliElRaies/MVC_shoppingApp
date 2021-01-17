@@ -1,4 +1,5 @@
 ﻿using eShop.Core.Models;
+using eShop.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -15,6 +16,8 @@ namespace eShop.DataAccess.SQL
 
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketItem> BasketItems { get; set; }
     }
     
 }
