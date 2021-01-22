@@ -5,7 +5,7 @@ namespace eShop.DataAccess.SQL.Migrations
     
     public partial class AddBasket : DbMigration
     {
-        public override void Up()
+        public override void Up()  
         {
             CreateTable(
                 "dbo.BasketItems",
