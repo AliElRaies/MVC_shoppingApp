@@ -39,7 +39,7 @@ namespace eShop.Services
                 {
                     if (createIfNull)
                     {
-                        basket = createNewBasket(httpContext);
+                        basket = CreateNewBasket(httpContext);
                     }
                 }
             }
@@ -47,7 +47,7 @@ namespace eShop.Services
             {
                 if (createIfNull)
                 {
-                    basket = createNewBasket(httpContext);
+                    basket = CreateNewBasket(httpContext);
                 }
             }
             return basket;
