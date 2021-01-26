@@ -16,7 +16,7 @@
 
     @foreach (var item in Model.Products)
     {
-        <div class="col-md-4" style="height:450px;padding:1-px;margin:10px;border: solid thin whitesmoke">
+        <div class="col-md-4" style="height:450px;padding:10px;margin:10px;border: solid thin whitesmoke">
             <div class="col-md-12">
                 <img class="img" style="height:250px" src="~/Content/ProductImages/@item.Image" />
             </div>
@@ -30,7 +30,7 @@
                 <h4>@item.Price</h4>
             </div>
             <div>
-                <a href="#" class="btn btn-default">Add to Basket</a>
+                <a href="@Url.Action("AddToBasket", "Basket", new { id =item.ID })" class="btn btn-default">Add to Basket</a>
             </div>
         </div>
     }
